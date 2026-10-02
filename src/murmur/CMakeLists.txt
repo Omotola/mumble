@@ -51,6 +51,7 @@ add_library(mumble_server_object_lib OBJECT
 	"${SHARED_SOURCE_DIR}/User.cpp"
 	"${SHARED_SOURCE_DIR}/User.h"
 )
+set_target_properties(mumble_server_object_lib PROPERTIES UNITY_BUILD ON) # EXP-UNITY
 
 if(WIN32)
 	add_executable(mumble-server WIN32 "main.cpp")

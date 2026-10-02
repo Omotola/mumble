@@ -39,6 +39,7 @@ find_pkg(Protobuf REQUIRED)
 add_compile_options(${MUMBLE_COMPILER_FLAGS})
 
 add_library(shared STATIC)
+set_target_properties(shared PROPERTIES UNITY_BUILD ON) # EXP-UNITY
 
 protobuf_generate(LANGUAGE cpp TARGET shared PROTOS ${PROTO_FILE} OUT_VAR BUILT_PROTO_FILES)
 protobuf_generate(LANGUAGE cpp TARGET shared PROTOS ${UDP_PROTO_FILE} OUT_VAR BUILT_UDP_PROTO_FILES)

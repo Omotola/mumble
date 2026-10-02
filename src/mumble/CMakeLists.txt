@@ -356,6 +356,7 @@ add_custom_command(
 list(APPEND MUMBLE_SOURCES "${CMAKE_BINARY_DIR}/mumble_flags.qrc")
 
 add_library(mumble_client_object_lib OBJECT ${MUMBLE_SOURCES})
+set_target_properties(mumble_client_object_lib PROPERTIES UNITY_BUILD ON) # EXP-UNITY
 target_link_libraries(mumble_client_object_lib PUBLIC smallft)
 
 if(WIN32 AND NOT CMAKE_BUILD_TYPE STREQUAL "Debug")
@@ -606,12 +607,6 @@ if(WIN32)
 
 		"${CMAKE_SOURCE_DIR}/overlay/ods.cpp"
 	)
-
-	# WinGUIDs.cpp includes initguid.h which causes a macro definition in guiddef.h to be
-	# changed in such a way that subsequent usages break (redefinition errors).
-	# Thus we must not package this source file in a unity build allowing other files
-	# to include plain guiddef.h without having to worry about side-effects.
-	set_source_files_properties("WinGUIDs.cpp" PROPERTIES SKIP_UNITY_BUILD_INCLUSION TRUE)
 
 	find_pkg(Boost
 		COMPONENTS
